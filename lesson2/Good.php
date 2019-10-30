@@ -1,6 +1,6 @@
 <?php
-include
-
-class Good {
-
+class Good extends AbstractGood {
+  function getFinalCoast(): int {
+    return $this->getCoast();
+  }
 }
