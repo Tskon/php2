@@ -1,0 +1,7 @@
+<ul>
+  {% for image in imageList %}
+    <a href="{{ "#{imageDir}#{image}" }}">
+      <img width="150px" src="{{ "#{imageDir}#{image}" }}" alt="{{ image }}">
+    </a>
+  {% endfor %}
+</ul>
