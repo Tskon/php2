@@ -1,6 +1,5 @@
 <?php
-define('DB_NAME', 'catalog');
-define('DB_USER', 'root');
-define('DB_PASSWORD', '');
-define('DB_ADDRESS', 'http://lesson4/');
-define('DB_PORT', '3306');
+$DB_NAME = 'catalog';
+$DB_USER = 'mysql2';
+$DB_PASSWORD = 'mysql2';
+$DB_HOST = 'lesson4';
