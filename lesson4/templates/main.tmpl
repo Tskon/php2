@@ -8,26 +8,36 @@
   <title>Document</title>
 </head>
 <body>
-  <ul>
+  <ul class="js-good-list">
     {% for good in goods %}
-      <li class="js-good">{{ good.title }} - {{ good.coast }}руб.</li>
+      <li class="js-good">{{ good.title }} - {{ good.cost }}руб.</li>
     {% endfor %}
   </ul>
 
-  <button onclick="getMoreGoods" class="js-get-more-goods">Загрузить еще товары</button>
+  <button onclick="getMoreGoods()" class="js-get-more-goods">Загрузить еще товары</button>
 </body>
 
 <script>
   function getMoreGoods() {
     const count = document.querySelectorAll('.js-good').length
 
-    const ajax = fetch('/api/get-more-goods', {
+    const ajax = fetch('/api/get-more-goods.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
       body: JSON.stringify({offset: count})
     })
+      .then(response => response.json())
+      .then(goods => {
+        let html = ''
+        goods.forEach(good => {
+          html += `<li class="js-good">${good.title} - ${good.cost}руб.</li>`
+        })
+
+        const goodList = document.querySelector('.js-good-list')
+        goodList.innerHTML += html
+      })
   }
 </script>
 </html>
