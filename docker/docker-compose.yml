@@ -1,7 +1,29 @@
-web:
-  image: nginx:latest
-  ports:
-    - "8080:80"
-  volumes:
-    - ../src:/code
-    - ./nginx/site.conf:/etc/nginx/conf.d/site.conf
+version: "3.3"
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Nginx.Dockerfile
+    ports:
+      - 80:80
+    links:
+      - fpm
+    volumes:
+      - ./src:/var/www/test-docker
+  fpm:
+    build:
+      context: .
+      dockerfile: Fpm.Dockerfile
+    volumes:
+      - ./src:/var/www/test-docker
+    links:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 33061:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=laravel
+
